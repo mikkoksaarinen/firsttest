@@ -8,21 +8,14 @@ on:
 jobs:
   check-branch:
     runs-on: ubuntu-latest
-    if: github.base_ref == 'master'
 
     steps:
       - name: Check source branch
         run: |
           if [ "$GITHUB_HEAD_REF" != "develop" ]; then
-            if [ "$GITHUB_BASE_REF" == "master" ]; then
-              echo "Error: Pull requests to 'master' can only originate from 'develop'."
-              echo "Current source branch: $GITHUB_HEAD_REF"
-              echo "Current target branch: $GITHUB_BASE_REF"
-              exit 1
-            fi
+            echo "Error: Pull requests to 'master' can only originate from 'develop'."
+            echo "Current source branch: $GITHUB_HEAD_REF"
+            exit 1
           fi
       - name: Success
-        run: |
-          echo "✓ Pull request is from 'develop' to 'master'. Proceeding..."
-          echo "Current source branch: $GITHUB_HEAD_REF"
-          echo "Current target branch: $GITHUB_BASE_REF"
+        run: echo "✓ Pull request is from 'develop' to 'master'. Proceeding..."

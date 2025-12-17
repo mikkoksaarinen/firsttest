@@ -14,10 +14,12 @@ jobs:
       - name: Check source branch
         run: |
           if [ "$GITHUB_HEAD_REF" != "develop" ]; then
-            echo "Error: Pull requests to 'master' can only originate from 'develop'."
-            echo "Current source branch: $GITHUB_HEAD_REF"
-            echo "Current target branch: $GITHUB_BASE_REF"
-            exit 1
+            if [ "$GITHUB_BASE_REF" == "master" ]; then
+              echo "Error: Pull requests to 'master' can only originate from 'develop'."
+              echo "Current source branch: $GITHUB_HEAD_REF"
+              echo "Current target branch: $GITHUB_BASE_REF"
+              exit 1
+            fi
           fi
       - name: Success
         run: |

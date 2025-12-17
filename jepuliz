@@ -7,3 +7,4 @@ ei kait tää ny mee suoraa masterii
 222
 xx
 
+&& "$GITHUB_BASE_REF" == "master" 

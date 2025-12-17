@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Check source branch
         run: |
-          if [ "$GITHUB_HEAD_REF" != "develop" ]; then
+          if [ "$GITHUB_HEAD_REF" != "develop" && "$GITHUB_BASE_REF" == "master" ]; then
             echo "Error: Pull requests to 'master' can only originate from 'develop'."
             echo "Current source branch: $GITHUB_HEAD_REF"
             exit 1
